@@ -1,11 +1,15 @@
-import { Link } from 'react-router-dom'
+import {useContext} from 'react'
+import { PostStateContext } from '../../App'
+import { useNavigate } from 'react-router-dom'
 import Subbanner from '../../components/Subbanner'
 import Header from '../../components/Header'
-import temp_img from '../../assets/movie_img.png'
 import Button from '../../components/Button'
-import './movie.css'
+import './Movie.css'
+import MovieItem from './MovieItem'
 
 const Movielist=()=>{
+    const data = useContext(PostStateContext)
+    const nav = useNavigate();
     return(
         <div className="Movielist">
             <Header></Header>
@@ -23,86 +27,14 @@ const Movielist=()=>{
                 <div className="content_body">
                     <div className="container_fix">
                         <ul className="movie_con">
-                            <li className="movie_con_it">
-                                <a href="/movie/view">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status">개봉예정</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                            <li className="movie_con_it">
-                                <a href="">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status ing">상영중</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                            <li className="movie_con_it">
-                                <a href="">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status">개봉예정</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                            <li className="movie_con_it">
-                                <a href="">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status">개봉예정</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                            <li className="movie_con_it">
-                                <a href="">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status">개봉예정</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                            <li className="movie_con_it">
-                                <a href="">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status">개봉예정</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                            <li className="movie_con_it">
-                                <a href="">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status">개봉예정</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                            <li className="movie_con_it">
-                                <a href="">
-                                    <div className="img_wrap">
-                                        <img src={temp_img}/>
-                                    </div>
-                                    <h5><span className="status">개봉예정</span> <span className="movie_title">설계자들설계자들설계자들</span></h5>
-                                    <p>영화에 대한 설명이 간략하게 노출됩니다</p>
-                                </a>
-                            </li>
-                        
+                            {data?.map((item)=><MovieItem key={item.id}{...item}/>)}
                         </ul>
                     </div>
                 </div>
                 <div className="content_tail">
                     <div className="container_fix">
                         <div className="btn_list">
-                            <Button text={'글쓰기'} color={'color'} onClick={()=>{console.log('click')}}/>
+                            <Button text={'글쓰기'} color={'color'} onClick={()=>{nav('write')}}/>
                         </div>
                         <div className="pagination">
                             <ul className="pagination_wrap">

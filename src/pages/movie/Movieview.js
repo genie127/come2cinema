@@ -1,10 +1,12 @@
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import Subbanner from '../../components/Subbanner'
 import Viewer from '../../components/Viewer'
-import './movie.css'
+import './Movie.css'
+import Button from '../../components/Button'
 
-const Movieview=()=>{
+const Movieview=(id)=>{
     const params = useParams();
+    const nav = useNavigate();
     return(
         <div className="Moviewrite">
             <Subbanner></Subbanner>
@@ -23,7 +25,9 @@ const Movieview=()=>{
                 <div className="content_tail">
                     <div className="container_fix">
                         <div className="btn_list">
-                            <Link to='/movie' className='btn_default'>목록</Link>
+                            <Button text={'목록으로'}  onClick={`/movie`} />
+                            <Button text={'수정하기'}  onClick={`/movie/edit/${id}`} />
+                            <Button text={'글쓰기'} color={"color"} onClick={`/movie/write`} />
                             <Link to='/Movie/write' className='btn_default color'>글쓰기</Link>
                         </div>
                     </div>
