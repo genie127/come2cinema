@@ -3,11 +3,14 @@ import './Movie.css'
 import Editor from '../../components/Editor'
 import { useContext } from 'react'
 import { PostDispatchContext } from '../../App'
+import {useNavigate} from 'react-router-dom' 
 
 const Moviewrite=()=>{
+    const nav = useNavigate();
     const {onCreate} = useContext(PostDispatchContext)
     const onSubmit = (input)=>{
-        onCreate(input.title, input.status,input.img,input.content);
+        onCreate(input.title, input.status,input.content);
+        nav('/movie', {replace: true})
     }
     return(
         <div className="Moviewrite">

@@ -19,8 +19,9 @@
 .search_form button span:before{content:''; display: block; border:1px solid #ffb800; width: 10px; height: 10px; border-radius:50%; position: absolute; top: 0; left: 0;}
 .search_form button span:after{content:''; display: block; width: 4.5px; height: 1px; position: absolute; right: 0; bottom: 0; transform:translate(0%,-50%) rotate(45deg); background: #ffb800;}
 
-.movie_con{display: flex; flex-wrap:wrap; justify-content: space-between; margin-bottom: -25px;}
-.movie_con_it{width: 21.094%; margin-bottom: 55px; cursor:pointer}
+.movie_con{display: flex; flex-wrap:wrap; margin-bottom: -25px;}
+.movie_con_it{width: 21.094%; margin-bottom: 55px; cursor:pointer; margin-right: 5.208%;}
+.movie_con_it:nth-child(4n){margin-right: 0;}
 .movie_con_it .img_wrap{width: 100%;}
 .movie_con_it .img_wrap img{width: 100%;}
 .movie_con_it h5{display: flex;padding-top: 15px; align-items: center;}
@@ -53,7 +54,10 @@
 /* 요즘영화 상세 */
 .content_title{text-align: center; border-top:2px solid #333; border-bottom:1px solid #a3a3a3; padding: 14px 0;}
 .content_title h5{font-weight:600;font-size: 18px; }
-.content_con{background: #efefef;  min-height:500px;margin: 15px 0; padding: 15px 15px; }
+.content_title .status{color:#fff; background: #999; border-radius:3px; font-size:12px; padding: 5px; margin-right: 10px; white-space: nowrap; display: inline-block;}
+.content_title .status.ing{background: #ffb800;}
+.content_con{min-height:500px;margin: 15px 0; padding: 15px 15px 45px; }
+.content_con img{max-width:100%; margin-bottom: 25px;}
 .view_reply{margin-top: 30px; }
 .view_reply .reply_tt{padding: 10px 20px; background: #ffb800; color:#fff; font-weight:500; font-size:16px}
 

@@ -1,40 +1,18 @@
 
 import './App.css';
-import {useReducer, useRef, createContext} from "react"
+import {useReducer, useRef, createContext, useState, useEffect} from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"; // 라우팅을 위한 react-router-dom import
 import Main from './components/Main'
 import MovieList from './pages/movie/MovieList'
 import MovieWrite from './pages/movie/MovieWrite'
 import MovieEdit from './pages/movie/MovieEdit'
 import MovieView from './pages/movie/MovieView'
-import img from './assets/movie_img.png'
 
-const mockData = [
-  {
-    id:1,
-    title:1,
-    img:img,
-    status:'상영중',
-    content: '1번일기내용',
+import axios from 'axios'
 
-  },
-  {
-    id:2,
-    title:2,
-    img:img,
-    status:'개봉예정',
-    content: '2번일기내용',
+const response = await axios.get('//localhost:8000/movie');
+const mockData =response.data;
 
-  },
-  {
-    id:3,
-    title:3,
-    img:img,
-    status:'상영중',
-    content: '3번일기내용',
-
-  }
-]
 
 function reducer(state, action){
   switch(action.type){
@@ -58,26 +36,26 @@ function App() {
   const [data, dispatch] = useReducer(reducer,mockData)
   const idRef = useRef(4);
 
-  const onCreate=(status,img,title,content)=>{//게시글 추가
+  const onCreate=(title,movie_status,img,content)=>{//게시글 추가
     dispatch({
       type:"CREATE", 
       data:{
         id: idRef.current++,
         title,
-        status,
+        movie_status,
         img,
         content,
       },
       
     })
   }
-  const onEdit=(id,status,img,title,content)=>{ //게시글 수정
+  const onEdit=(id,title,movie_status,img,content)=>{ //게시글 수정
     dispatch({
       type:'UPDATE',
       data:{
         id,
         title,
-        status,
+        movie_status,
         img,
         content,
       },
