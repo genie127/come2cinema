@@ -22,8 +22,9 @@
 .movie_con{display: flex; flex-wrap:wrap; margin-bottom: -25px;}
 .movie_con_it{width: 21.094%; margin-bottom: 55px; cursor:pointer; margin-right: 5.208%;}
 .movie_con_it:nth-child(4n){margin-right: 0;}
-.movie_con_it .img_wrap{width: 100%;}
-.movie_con_it .img_wrap img{width: 100%;}
+.movie_con_it .img_wrap{width: 100%; padding-bottom: 143.333%;height: 0; position: relative; overflow: hidden;}
+.movie_con_it .img_wrap .img_empty{background: #ccc;}
+.movie_con_it .img_wrap > *{min-width:100%; height: 100%; position: absolute; left: 50%; top: 50%; transform:translate(-50%,-50%); }
 .movie_con_it h5{display: flex;padding-top: 15px; align-items: center;}
 .movie_con_it h5 .movie_title{font-size:18px; font-weight:500; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; display: block;}
 .movie_con_it h5 .status{color:#fff; background: #999; border-radius:3px; font-size:12px; padding: 5px; margin-right: 10px; white-space: nowrap;}
@@ -36,7 +37,7 @@
 .btn_default{font-size:15px; border-radius:5px; border:1px solid #ffb800; padding: 6px 20px; text-align: center; min-width:80px;color:#ffb800; display: inline-block; background: #fff; cursor:pointer}
 .btn_default + .btn_default{margin-left: 8px;}
 .btn_default.color{color:#fff; background: #ffb800;}
-.pagination{margin-top: 25px; text-align: center;}
+.pagination{margin-top: 25px; display: flex; justify-content: center;}
 .pagination ul{ display: flex; justify-content: center;}
 .pagination li a{ color:#999; font-size:16px; font-weight:300; width: 22px; height: 22px; text-align: center; display: inline-block; line-height: 22px; margin: 0 1px; border-radius:50%;}
 .pagination li.active a{background: #ffb800; color:#fff}

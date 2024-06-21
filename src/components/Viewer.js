@@ -10,7 +10,7 @@ const Viewer=({id, title, movie_status, img, content})=>{
             </div>
             <div className="content_con">
                 <div className='img_wrap'>
-                    <img src={img}/>
+                    <img src={`//localhost:8000/${img}`}/>
                 </div>
                 <div className='txt_wrap'>
                     {content}

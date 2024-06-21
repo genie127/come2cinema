@@ -40,7 +40,7 @@ const Movieview=()=>{
       }, [id]);
   
     const onClickDelete=async(post)=>{
-        //if(window.confirm("삭제하시겠습니까?")){ // 확인버튼 = true
+        if(window.confirm("삭제하시겠습니까?")){ // 확인버튼 = true
             //일기삭제로직
             await Axios.post(`http://localhost:8000/movie/post/delete`, {
                 id: id
@@ -53,7 +53,7 @@ const Movieview=()=>{
                     console.error(e);
                 });
             nav('/movie',{replace:true})
-       // }
+        }
     }
     if (loading) {
         return <div>Loading...</div>; // 로딩 상태 표시
@@ -84,7 +84,7 @@ const Movieview=()=>{
                 <div className="content_tail">
                     <div className="container_fix">
                         <div className="btn_list">
-                            <Button text={'목록으로'}  onClick={()=>{nav(`/movie`)}} />
+                            <Button text={'목록으로'}  onClick={()=>{nav(`/movie/1`)}} />
                             <Button text={'삭제하기'}  onClick={()=>{onClickDelete()}} />
                             <Button text={'수정하기'}  onClick={()=>{nav(`/movie/edit/${params.id}`)}} />
                             <Button text={'글쓰기'} color={"color"} onClick={()=>{nav(`/movie/write`)}} /> 

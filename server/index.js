@@ -8,8 +8,19 @@ const bcrypt = require("bcrypt");
 const session = require("express-session"); 
 const MySQLStore = require("express-mysql-session")(session); 
 const dotenv = require("dotenv"); 
-
+const multer = require("multer");
 const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: "./uploads/",
+  filename: function(req, file, cb) {
+    cb(null, "imgfile" + Date.now() + path.extname(file.originalname));
+  }
+});
+const upload = multer({
+  storage: storage,
+  // limits: { fileSize: 1000000 } // 파일 최대 용량
+});
 
 // 환경변수 설정 파일을 불러옵니다.
 dotenv.config(); 
@@ -28,7 +39,8 @@ app.use(express.json());
 app.use(cors());
 
 // 정적 파일을 제공하기 위해 디렉토리를 설정합니다.
-app.use(express.static(path.join(__dirname + "/images")));
+app.use(express.static(path.join(__dirname + "/uploads")));
+
 
 // 환경변수에서 데이터베이스 연결 정보를 가져옵니다.
 const { DB_HOST, DB_USER, DB_PASSWORD, DB_DATABASE, DB_PORT } = process.env;
@@ -72,15 +84,20 @@ app.get('/movie', (req, res) => { //영화 게시판 목록 불러오기
     res.json(results);
   });
 });
-app.post('/movie/write', (req, res) => { //영화 게시판 글쓰기
-  const { title, movie_status, img, content } = req.body;
-  console.log(req.body);
+
+
+app.post('/movie/write', upload.single('img'), (req, res) => { //영화 게시판 글쓰기
+  const { title, movie_status, content } = req.body;
+  const img = req.file ? req.file.filename : null;
+
+  console.log(req.body)
+
   const sql = 'INSERT INTO board_movie (title, movie_status, img, content) VALUES (?, ?, ?, ?)';
   connection.query(sql, [title, movie_status, img, content], (err, results) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.status(200).json({ id: results.insertId, title, movie_status, content });
+    res.status(200).json({ id: results.insertId, title, movie_status, img, content });
   });
 });
 
@@ -100,16 +117,17 @@ app.get('/movie/post/:id', (req, res) => { //영화게시판 게시글 상세페
 
 
 
-app.post('/movie/edit/:id', (req, res) => { //영화 게시판 수정
+app.post('/movie/edit/:id', upload.single('img'), (req, res) => { //영화 게시판 수정
   const { id } = req.params;
-  const { title, movie_status, img, content } = req.body;
-  console.log('id==='+id);
-  const sql = 'update board_movie set title=?, movie_status = ?, img=?, content=? where id =?'
+  const { title, movie_status, content } = req.body;
+  const img = req.file ? req.file.filename : req.body.existingImg; // 이미지 교체 시 replace
+  console.log({ title, movie_status, content })
+  const sql = 'UPDATE board_movie SET title = ?, movie_status = ?, img = ?, content = ? WHERE id = ?';
   connection.query(sql, [title, movie_status, img, content, id], (err, results) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.status(200).json({ id: results.insertId, title, movie_status, content });
+    res.status(200).json({ id, title, movie_status, img, content });
   });
 });
 

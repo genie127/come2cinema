@@ -75,7 +75,7 @@ function App() {
             <PostDispatchContext.Provider value={{onCreate, onEdit, onDelete}}>
               <Routes>
                   <Route path="/" element={<Main />} />
-                  <Route path="/movie" element={<MovieList />} /> {/* 영화목록 - sjh */}
+                  <Route path="/movie/:page" element={<MovieList />} /> {/* 영화목록 - sjh */}
                   <Route path='/movie/write' element={<MovieWrite/>}/>{/* 영화글쓰기 - sjh */}
                   <Route path='/movie/edit/:id' element={<MovieEdit/>}/>{/* 영화수정 - sjh */}
                   <Route path='/movie/post/:id' element={<MovieView/>}/>{/* 영화상세 - sjh */}

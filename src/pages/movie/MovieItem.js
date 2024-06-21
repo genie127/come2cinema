@@ -5,7 +5,10 @@ const Movieitem=({id, movie_status, title, img, content})=>{
     return(
         <li className="movie_con_it" onClick={()=>{nav(`/movie/post/${id}`)}}>
                 <div className="img_wrap">
-                    <img src={img}/>
+                    {img === null ?
+                        <div className="img_empty"></div>
+                    :
+                        <img src={`//localhost:8000/${img}`}/>}
                 </div>
                 <h5>
                     {
