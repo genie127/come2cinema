@@ -7,6 +7,7 @@ import MovieList from './pages/movie/MovieList'
 import MovieWrite from './pages/movie/MovieWrite'
 import MovieEdit from './pages/movie/MovieEdit'
 import MovieView from './pages/movie/MovieView'
+import Contact from './pages/cs/Contact';
 
 import axios from 'axios'
 
@@ -79,6 +80,7 @@ function App() {
                   <Route path='/movie/write' element={<MovieWrite/>}/>{/* 영화글쓰기 - sjh */}
                   <Route path='/movie/edit/:id' element={<MovieEdit/>}/>{/* 영화수정 - sjh */}
                   <Route path='/movie/post/:id' element={<MovieView/>}/>{/* 영화상세 - sjh */}
+                  <Route path='/contact' element={<Contact/>}/>{/* 영화상세 - sjh */}
                 </Routes>
             </PostDispatchContext.Provider>
           </PostStateContext.Provider>

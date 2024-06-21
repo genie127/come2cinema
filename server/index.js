@@ -120,7 +120,18 @@ app.get('/movie/post/:id', (req, res) => { //영화게시판 게시글 상세페
 app.post('/movie/edit/:id', upload.single('img'), (req, res) => { //영화 게시판 수정
   const { id } = req.params;
   const { title, movie_status, content } = req.body;
+  const columns = ['title', 'movie_status', 'content'];
+  const values = [title, movie_status, content];
+  let img1Path;
   const img = req.file ? req.file.filename : req.body.existingImg; // 이미지 교체 시 replace
+  if (req.img) {
+    img1Path = `http://localhost:8000/${req.file.path.replace(/\\/g, "/")
+      .replace("images/", "")
+      .replace("server/", "")}`;
+    columns.push('img1');
+    values.push(img1Path);
+    
+  }
   console.log({ title, movie_status, content })
   const sql = 'UPDATE board_movie SET title = ?, movie_status = ?, img = ?, content = ? WHERE id = ?';
   connection.query(sql, [title, movie_status, img, content, id], (err, results) => {

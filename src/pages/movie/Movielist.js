@@ -4,7 +4,7 @@ import { useNavigate,useParams } from 'react-router-dom'
 import Subbanner from '../../components/Subbanner'
 import Header from '../../components/Header'
 import Button from '../../components/Button'
-import './Movie.css'
+import '../Movie.css'
 import MovieItem from './MovieItem'
 import Pagination from '../../components/Pagination'
 
@@ -68,7 +68,7 @@ const Movielist=()=>{
     return(
         <div className="Movielist">
             <Header></Header>
-            <Subbanner></Subbanner>
+            <Subbanner title={'요즘 영화'} text={'최근 개봉작과 개봉 예정작을 만나보세요.'} pageName={`sub_movie`}/>
              <div className="content_wrap">
                 <div className="content_header">
                     <div className="container_fix clearfix">

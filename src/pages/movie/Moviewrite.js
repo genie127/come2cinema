@@ -1,5 +1,5 @@
 import Subbanner from '../../components/Subbanner'
-import './Movie.css'
+import '../Movie.css'
 import Editor from '../../components/Editor'
 import { useContext } from 'react'
 import { PostDispatchContext } from '../../App'
@@ -14,7 +14,7 @@ const Moviewrite=()=>{
     }
     return(
         <div className="Moviewrite">
-            <Subbanner></Subbanner>
+            <Subbanner title={'요즘 영화'} text={'최근 개봉작과 개봉 예정작을 만나보세요.'} pageName={'sub_movie'}/>
              <div className="content_wrap">
                 <div className="content_header">
                     <div className="container_fix clearfix">

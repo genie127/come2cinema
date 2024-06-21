@@ -2,7 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Subbanner from '../../components/Subbanner'
 import Viewer from '../../components/Viewer'
-import './Movie.css'
+import '../Movie.css'
 import Button from '../../components/Button'
 import Axios from 'axios'
 
@@ -69,7 +69,7 @@ const Movieview=()=>{
     
     return(
         <div className="Moviewrite">
-            <Subbanner></Subbanner>
+            <Subbanner title={'요즘 영화'} text={'최근 개봉작과 개봉 예정작을 만나보세요.'} pageName={'sub_movie'}/>
              <div className="content_wrap">
                 <div className="content_header">
                     <div className="container_fix clearfix">
