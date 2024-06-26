@@ -11,6 +11,8 @@ const dotenv = require("dotenv");
 const multer = require("multer");
 const path = require("path");
 
+const fs = require('fs')
+
 const storage = multer.diskStorage({
   destination: "./uploads/",
   filename: function(req, file, cb) {
@@ -90,7 +92,7 @@ app.post('/movie/write', upload.single('img'), (req, res) => { //영화 게시�
   const { title, movie_status, content } = req.body;
   const img = req.file ? req.file.filename : null;
 
-  console.log(req.body)
+  console.log({ title, movie_status, content } +',...'+ req.file.filename)
 
   const sql = 'INSERT INTO board_movie (title, movie_status, img, content) VALUES (?, ?, ?, ?)';
   connection.query(sql, [title, movie_status, img, content], (err, results) => {
@@ -120,42 +122,42 @@ app.get('/movie/post/:id', (req, res) => { //영화게시판 게시글 상세페
 app.post('/movie/edit/:id', upload.single('img'), (req, res) => { //영화 게시판 수정
   const { id } = req.params;
   const { title, movie_status, content } = req.body;
-  const columns = ['title', 'movie_status', 'content'];
-  const values = [title, movie_status, content];
-  let img1Path;
   const img = req.file ? req.file.filename : req.body.existingImg; // 이미지 교체 시 replace
-  if (req.img) {
-    img1Path = `http://localhost:8000/${req.file.path.replace(/\\/g, "/")
-      .replace("images/", "")
-      .replace("server/", "")}`;
-    columns.push('img1');
-    values.push(img1Path);
-    
-  }
-  console.log({ title, movie_status, content })
+
   const sql = 'UPDATE board_movie SET title = ?, movie_status = ?, img = ?, content = ? WHERE id = ?';
   connection.query(sql, [title, movie_status, img, content, id], (err, results) => {
     if (err) {
       return res.status(500).send(err);
     }
-    res.status(200).json({ id, title, movie_status, img, content });
+    if(req.file){
+      fs.unlink(`${__dirname}/uploads/${req.body.existingImg}`, function(err) {
+       
+        res.status(200).json({ id, title, movie_status, img, content });
+      }) 
+    }
   });
 });
 
 app.post("/movie/post/delete", (req, res) => {//영화게시판 게시글 삭제
-  const { id } = req.body;
+  const { id, img } = req.body;
   // const value = [id];
+  console.log(req.body)
   const sqlQuery = "DELETE FROM board_movie WHERE id = ?";
   connection.query(sqlQuery, id, (err, result) => {
     if (err) {
       console.error("에러", err);
       res.status(500).send("서버에러");
     } else {
-      res.status(200).send("삭제");
-    }
-  });
-});
+      fs.unlink(`${__dirname}/uploads/${img}`, function(err) {
 
+        res.json({isDeleted:"true"});
+      })
+    }
+    
+  });
+
+  
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
   });

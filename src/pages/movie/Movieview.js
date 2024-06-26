@@ -39,20 +39,21 @@ const Movieview=()=>{
           });
       }, [id]);
   
-    const onClickDelete=async(post)=>{
+    const onClickDelete=async()=>{
         if(window.confirm("삭제하시겠습니까?")){ // 확인버튼 = true
             //일기삭제로직
             await Axios.post(`http://localhost:8000/movie/post/delete`, {
-                id: id
+                id: id,
+                img:post.img
             })
                .then(() => {
                     // this.getList();
-                    nav("/movie")
+                    nav("/movie/1")
                 })
                 .catch((e) => {
                     console.error(e);
                 });
-            nav('/movie',{replace:true})
+            nav('/movie/1',{replace:true})
         }
     }
     if (loading) {
