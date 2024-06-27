@@ -4,6 +4,7 @@
 
 /* 서브배너 */
 .sub_movie.sub_banner{background-image: url(../assets/subBanner_movie.png)}
+.sub_theater.sub_banner{background-image: url(../assets/subBanner_theater.png)}
 
 
 /* 요즘영화 게시판 목록 */
@@ -30,6 +31,15 @@
 .movie_con_it h5 .status{color:#fff; background: #999; border-radius:3px; font-size:12px; padding: 5px; margin-right: 10px; white-space: nowrap;}
 .movie_con_it h5 .status.ing{background: #ffb800;}
 .movie_con_it p{text-overflow: ellipsis; overflow: hidden; white-space: nowrap; margin-top: 15px; font-size:14px; color:#666}
+
+/* theater  */
+.theater_con{border-top:2px solid #333;}
+.theater_con_it{padding: 15px 10px; display: flex; border-bottom:1px solid #ccc}
+.theater_con_it .img_wrap{width: 23.437%; margin-right: 35px; min-height:180px}
+.theater_con_it .img_wrap img{height:100%; width: 100%; object-fit: cover;}
+.theater_con_it .text_wrap p{margin-top: 20px;}
+
+
 
 /* 페이지네이션 공통 */
 .content_tail{margin-bottom: 100px; margin-top: 25px;}

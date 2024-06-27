@@ -5,7 +5,7 @@ import Subbanner from '../../components/Subbanner'
 import Header from '../../components/Header'
 import Button from '../../components/Button'
 import '../Movie.css'
-import MovieItem from './MovieItem'
+import TheaterItem from './TheaterItem'
 import Pagination from '../../components/Pagination'
 
 const Movielist=()=>{
@@ -68,11 +68,11 @@ const Movielist=()=>{
     return(
         <div className="Movielist">
             <Header></Header>
-            <Subbanner title={'요즘 영화'} text={'최근 개봉작과 개봉 예정작을 만나보세요.'} pageName={`sub_movie`}/>
+            <Subbanner title={'요즘 극장'} text={'이색 극장들을 소개합니다.'} pageName={`sub_theater`}/>
              <div className="content_wrap">
                 <div className="content_header">
                     <div className="container_fix clearfix">
-                        <h3 className="content_tt">요즘 영화</h3>
+                        <h3 className="content_tt">요즘 극장</h3>
                     <form action="" className="search_form">
                         <input type="text" placeholder="검색어를 입력하세요"  value={search} onChange={onChangeSearch}/>
                         <button type="submit"><span className="search"></span></button>
@@ -81,9 +81,9 @@ const Movielist=()=>{
                 </div>
                 <div className="content_body">
                     <div className="container_fix">
-                        <ul className="movie_con">
+                        <ul className="theater_con">
                         { currentPosts && currentPosts.map((it)=>(
-                            <MovieItem key={it.id}{...it}/>))}
+                            <TheaterItem key={it.id}{...it}/>))}
                         </ul>
                     </div>
                 </div>
