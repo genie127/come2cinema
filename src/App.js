@@ -18,10 +18,10 @@ import Reservations from './pages/Ticket/Reservations'; // 예약 내역을 보�
 import PaymentPage from './pages/Ticket/PaymentPage'; // 결제 페이지를 보여주는 컴포넌트를 가져옴
 import './pages/Ticket/Ticket.css'; // 스타일(디자인) 파일을 가져옴
 
-import MovieList from './pages/movie/MovieList.js'
-import MovieWrite from './pages/movie/MovieWrite.js'
-import MovieEdit from './pages/movie/MovieEdit.js'
-import MovieView from './pages/movie/MovieView.js'
+import MovieList from './pages/movie/Movielist'
+import MovieWrite from './pages/movie/Moviewrite'
+import MovieEdit from './pages/movie/Movieedit'
+import MovieView from './pages/movie/Movieview'
 import Contact from './pages/cs/Contact';
 
 const response = await axios.get('//localhost:8000/board_movie');
@@ -152,7 +152,7 @@ const App = () => {
             setSelectedSeats={setSelectedSeats} // 선택한 좌석들을 설정하는 함수를 전달
           />
         }>
-          {background && <Route path="/ticket/modal" element={<TicketModal />} />}  {/* 결제용 모달창 hms */}
+          {background && <Route path="/seat-booking/modal" element={<TicketModal />} />}  {/* 결제용 모달창 hms */}
           </Route>
 
         {/* <Route path="/payment" element={<PaymentPage />} /> 
@@ -160,17 +160,13 @@ const App = () => {
 
         {/*-------------------kth-------------------------*/}
           <Route path="/signup" element={<Signup />} /> {/* 회원가입 - kwj */}
+          
           <Route path="/completeOrder" element={<TicketCompleteOrder />} /> {/* 결제완료페이지 hms */}
+
           <Route path="/Login" element={<Login />}></Route> {/* 로그인 - kth */}
           <Route path="/Mypage" element={<Mypage />}></Route> {/* 마이페이지 - kth */}
           <Route path="/userinfoupdate" element={<Userinfoupdate />}></Route> {/* 회원정보 수정 - kth */}
 
-
-
-
-
-
-       
           <Route path="/movie/:page" element={<MovieList />} /> {/* 영화목록 - sjh */}
           <Route path='/movie/write' element={<MovieWrite/>}/>{/* 영화글쓰기 - sjh */}
           <Route path='/movie/edit/:id' element={<MovieEdit/>}/>{/* 영화수정 - sjh */}

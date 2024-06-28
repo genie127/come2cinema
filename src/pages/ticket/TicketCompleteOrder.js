@@ -8,12 +8,15 @@ const TicketCompleteOrder = () => {
   // 메인 || 샵 이동 핸들러
   const onClickShopNavigateHandler = () => {
     navigate("/");
+    window.location.reload()
   };
 
   // 마이 페이지 이동 핸들러
   const onClickMyOrderListNavigateHandler = () => {
     navigate("/Mypage");
   };
+
+  const movie = location.state.orderData
 
   if (!location.state) {
     // 올바른 접근 방법이 아닐 경우 - navigate를 통해 들어오지 않아 state가 없는경우
@@ -64,7 +67,7 @@ const TicketCompleteOrder = () => {
               </div>
               <div className="complete-body">
                 <h4>예매완료</h4>
-                <p>예매가 완료되었습니다</p>
+                <p>{movie.deliveryMovieName} 예매가 완료되었습니다</p>
                 <input
                   type="button"
                   onClick={onClickMyOrderListNavigateHandler}
